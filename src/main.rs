@@ -1,34 +1,44 @@
-use reqwest;
-use serde::{Deserialize};
+use colored::*;
+use std::env;
 
-#[derive(Deserialize, Debug)]
-struct News {
-  news_id: i32,
-  url: String,
-  title: String,
-  date: i32,
-  source_id: i32,
-  source_name: String,
-  img_url: Option<String>,
-  reactions_count: i32,
-  content_views_count: i32,
-  category: Option<String>
+mod news;
+
+fn search(args: Vec<String>) {
+	if args.len() <= 2 {
+		return
+	}
+
+	/* 
+	 *	Dropping first 2 arguments and merging all of them on a string.
+	 *	First one is the executable path, second one is the command "search".
+	 *
+	 *	We're just interested on the rest of the arguments which are part of the
+	 *	search we did.
+	 */
+
+	let search_arguments: Vec<String> = args.clone().drain(2..).collect();
+	let search_term = search_arguments.join(" ");
+	news::search(search_term);
 }
 
-fn request_news(id: i32) -> Result<News, reqwest::Error> {
+fn help() {
+	println!("{} {}", "Canillitapp-rust-CLI".yellow(), "1.0");
+	println!("{} {}", "Por", "@betzerra".purple());
+	println!("{}", "https://github.com/betzerra".blue());
 
-  let canillitapp_base_url = "https://api.canillitapp.com";
-  let request_url = format!("{base_url}/news/{news_id}",
-                              base_url = canillitapp_base_url,
-                              news_id = id);
-
-  let mut response = reqwest::get(&request_url)?;
-
-  let news: News = response.json()?;
-  Ok(news)
+	let usage = r#"
+Uso: canillitapp-cli [search <término>]
+	"#;
+	println!("{}", usage);
 }
 
 fn main() {
-  let news = request_news(1).unwrap();
-  print!("{:#?}", news);
+
+
+	let args: Vec<String> = env::args().collect();
+
+  match args[1].as_ref() {
+    "search" => search(args),
+    _ => help()
+  }
 }
