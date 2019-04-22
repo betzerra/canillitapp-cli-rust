@@ -1,0 +1,9 @@
+[package]
+name = "canillitapp-cli"
+version = "0.1.0"
+authors = ["Ezequiel Becerra <ezequiel.becerra@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+reqwest = "0.9.15"
+serde = { version = "1.0", features = ["derive"] }
