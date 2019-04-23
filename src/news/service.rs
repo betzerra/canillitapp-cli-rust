@@ -48,3 +48,14 @@ pub fn fetch_from_search(search: String) -> Result<Vec<News>, reqwest::Error> {
   let news: Vec<News> = response.json()?;
   Ok(news) 
 }
+
+pub fn fetch_popular() -> Result<Vec<News>, reqwest::Error> {
+
+  let request_url = format!("{base_url}/popular",
+                            base_url = CONFIG.base_url);
+
+  let mut response = reqwest::get(&request_url)?;
+
+  let news: Vec<News> = response.json()?;
+  Ok(news) 
+}

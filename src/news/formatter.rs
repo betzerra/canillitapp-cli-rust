@@ -20,7 +20,18 @@ fn highlighted(string: &String, highlighted: &String) -> String {
 	return tmp
 }
 
-pub fn print_news(news: &News, highlight: &String) {
+pub fn print_news(news: &News) {
+	println!("- {}", &news.title);
+	println!("  {} - {}", news.source_name.purple(), news.date_string());
+	println!("  {}", news.website_url().blue());
+
+	match news.reactions_string() {
+	  Some(s) => println!("  {}", s),
+	  None => ()
+	}
+}
+
+pub fn print_news_with_highlight(news: &News, highlight: &String) {
 	
 	println!("- {}", highlighted(&news.title, &highlight));
 	println!("  {} - {}", news.source_name.purple(), news.date_string());
