@@ -27,7 +27,7 @@ pub fn print_news(news: &News, highlight: &String) {
 	println!("  {}", news.website_url().blue());
 
 	match news.reactions_string() {
-	  Some(s) => println!("{:?}", s),
+	  Some(s) => println!("  {}", s),
 	  None => ()
 	}
 }
