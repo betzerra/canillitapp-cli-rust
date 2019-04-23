@@ -22,9 +22,9 @@ fn search(args: Vec<String>) {
 }
 
 fn help() {
-	println!("{} {}", "Canillitapp-rust-CLI".yellow(), "1.0");
+	println!("{} {}", "canillitapp-cli-rust".yellow(), "1.0");
 	println!("{} {}", "Por", "@betzerra".purple());
-	println!("{}", "https://github.com/betzerra".blue());
+	println!("{}", "https://github.com/betzerra/canillitapp-cli-rust".blue());
 
 	let usage = r#"
 Uso: canillitapp-cli [search <término>] [popular]
