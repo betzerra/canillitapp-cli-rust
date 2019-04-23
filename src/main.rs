@@ -34,8 +34,12 @@ Uso: canillitapp-cli [search <término>]
 
 fn main() {
 
-
 	let args: Vec<String> = env::args().collect();
+
+	if args.len() <= 1 {
+		help();
+		return
+	}
 
   match args[1].as_ref() {
     "search" => search(args),
