@@ -27,7 +27,7 @@ fn help() {
 	println!("{}", "https://github.com/betzerra/canillitapp-cli-rust".blue());
 
 	let usage = r#"
-Uso: canillitapp-cli [search <término>] [popular]
+Uso: canillitapp-cli [search <término>] [popular] [trending]
 	"#;
 	println!("{}", usage);
 }
@@ -43,6 +43,7 @@ fn main() {
 
   match args[1].as_ref() {
     "search" => search(args),
+    "trending" => news::trending(),
     "popular" => news::popular(),
     _ => help()
   }

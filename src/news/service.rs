@@ -1,4 +1,5 @@
 use crate::news::models::News;
+use crate::news::models::Trending;
 use reqwest;
 
 struct Config {
@@ -58,4 +59,16 @@ pub fn fetch_popular() -> Result<Vec<News>, reqwest::Error> {
 
   let news: Vec<News> = response.json()?;
   Ok(news) 
+}
+
+pub fn fetch_trending(date: String) -> Result<Trending, reqwest::Error> {
+
+  let request_url = format!("{base_url}/trending/{date}/12",
+                            base_url = CONFIG.base_url,
+                            date = date);
+
+  let mut response = reqwest::get(&request_url)?;
+
+  let trending: Trending = response.json()?;
+  Ok(trending) 
 }

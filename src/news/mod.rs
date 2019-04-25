@@ -1,4 +1,4 @@
-
+use chrono::prelude::*;
 use url::percent_encoding::{utf8_percent_encode, DEFAULT_ENCODE_SET};
 
 mod models;
@@ -29,5 +29,19 @@ pub fn popular() {
 	for x in &news {
 		formatter::print_news(&x);
     println!("");
+	}
+}
+
+pub fn trending() {
+
+  let date = Local::now().format("%Y-%m-%d");
+
+	// Fetch popular news
+	let news = service::fetch_trending(date.to_string()).unwrap();
+
+	// Render
+	for x in &news.keywords {
+		formatter::print_array_of_news_with_highlight(&news.news[x], x);
+  	println!("");
 	}
 }

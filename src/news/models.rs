@@ -1,7 +1,12 @@
-extern crate chrono;
 use chrono::prelude::*;
-
 use serde::{Deserialize};
+use std::collections::HashMap;
+
+#[derive(Deserialize, Debug)]
+pub struct Trending {
+  pub keywords: Vec<String>,
+  pub news: HashMap<String, Vec<News>>,
+}
 
 #[derive(Deserialize, Debug)]
 pub struct News {
@@ -32,6 +37,14 @@ impl News {
     let datetime = NaiveDateTime::from_timestamp(self.date as i64, 0);
     let timestamp_str = datetime.format("%d-%m-%Y %H:%M");
     timestamp_str.to_string()
+  }
+
+  pub fn reactions_array(&self) -> Vec<String> {
+
+    self.reactions
+        .iter()
+        .map( |x| x.reaction.to_string() )
+        .collect::<Vec<_>>()
   }
 
   pub fn reactions_string(&self) -> Option<String> {
