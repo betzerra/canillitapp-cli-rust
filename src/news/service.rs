@@ -10,8 +10,6 @@ static CONFIG: Config = Config {
   base_url: "https://api.canillitapp.com"
 };
 
-// TODO: Implement this on unit tests, maybe?
-#[allow(dead_code)]
 pub fn fetch_from_id(id: i32) -> Result<News, reqwest::Error> {
 
   let request_url = format!("{base_url}/news/{news_id}",
@@ -24,8 +22,6 @@ pub fn fetch_from_id(id: i32) -> Result<News, reqwest::Error> {
   Ok(news)
 }
 
-// TODO: Implement fetch news from date
-#[allow(dead_code)]
 pub fn fetch_from_date(date: String) -> Result<Vec<News>, reqwest::Error> {
 
   let request_url = format!("{base_url}/latest/{date}",
