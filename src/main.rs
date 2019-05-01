@@ -16,9 +16,17 @@ fn search(args: Vec<String>) {
 	 *	search we did.
 	 */
 
-	let search_arguments: Vec<String> = args.clone().drain(2..).collect();
+	let mut search_arguments: Vec<String> = args.clone().drain(2..).collect();
+	
+	// If there's a -s flag, then format the results differently
+	let short_format_flag = String::from("-s");
+	let is_short_format = search_arguments.contains(&short_format_flag);
+	if is_short_format {
+		search_arguments.retain(|x| x != &short_format_flag);
+	}
+
 	let search_term = search_arguments.join(" ");
-	news::search(search_term);
+	news::search(search_term, is_short_format);
 }
 
 fn help() {
@@ -27,7 +35,7 @@ fn help() {
 	println!("{}", "https://github.com/betzerra/canillitapp-cli-rust".blue());
 
 	let usage = r#"
-Uso: canillitapp-cli [search <término>] [popular] [trending]
+Uso: canillitapp-cli [search <término>] [popular] [trending] [-s]
 	"#;
 	println!("{}", usage);
 }
