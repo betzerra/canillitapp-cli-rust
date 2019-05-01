@@ -6,7 +6,7 @@ mod service;
 mod formatter;
 mod test;
 
-pub fn search(term: String) {
+pub fn search(term: String, short_format: bool) {
 
 	// Percent encoding ("Macri Gato" to "Macri%20Gato")
 	let encoded_search_term = utf8_percent_encode(&term, DEFAULT_ENCODE_SET);
@@ -16,8 +16,7 @@ pub fn search(term: String) {
 
 	// Render
 	for x in &news {
-		formatter::print_news_with_highlight(&x, &term);
-		println!("");
+		formatter::print_news_with_highlight(&x, &term, short_format);
 	}
 }
 

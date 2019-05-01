@@ -31,8 +31,13 @@ pub fn print_news(news: &News) {
 	}
 }
 
-pub fn print_news_with_highlight(news: &News, highlight: &String) {
+pub fn print_news_with_highlight(news: &News, highlight: &String, short: bool) {
 	
+	if short {
+		println!("- {}. {}", highlighted(&news.title, &highlight), news.source_name.purple());
+		return
+	}
+
 	println!("- {}", highlighted(&news.title, &highlight));
 	println!("  {} - {}", news.source_name.purple(), news.date_string());
 	println!("  {}", news.website_url().blue());
@@ -41,6 +46,8 @@ pub fn print_news_with_highlight(news: &News, highlight: &String) {
 	  Some(s) => println!("  {}", s),
 	  None => ()
 	}
+	
+	println!("");
 }
 
 fn reactions_from_array_of_news(news: &Vec<News>) -> Vec<String> {
