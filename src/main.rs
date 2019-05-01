@@ -30,7 +30,7 @@ fn search(args: Vec<String>) {
 }
 
 fn help() {
-	println!("{} {}", "canillitapp-cli-rust".yellow(), "1.0");
+	println!("{} {}", "canillitapp-cli-rust".yellow(), "1.1.0");
 	println!("{} {}", "Por", "@betzerra".purple());
 	println!("{}", "https://github.com/betzerra/canillitapp-cli-rust".blue());
 
